@@ -8,12 +8,15 @@ import {
   FormControl,
   DropdownButton,
   Dropdown,
+  Row,
+  Button,
 } from "react-bootstrap";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { FaSort } from "react-icons/fa";
+import { MdClear } from "react-icons/md";
 
 const RecordsTable = () => {
+  const [staticResults, setStaticResults] = useState([]);
   const [results, setResults] = useState([]);
   const [sortDir, setSortDir] = useState("asc");
   const [filterBy, setFilterBy] = useState("name");
@@ -48,7 +51,7 @@ const RecordsTable = () => {
               ? "Regular"
               : "Expensive",
         }));
-
+      setStaticResults(results);
       setResults(results);
     };
     fetchAPI();
@@ -67,38 +70,33 @@ const RecordsTable = () => {
     ));
   };
 
-  const sortTable = (col) => {
-    const data = _.cloneDeep(results);
-    if (sortDir === "asc") {
-      setSortDir("desc");
-      data.sort((a, b) => (a[col] < b[col] ? 1 : a[col] > b[col] ? -1 : 0));
-    } else {
-      setSortDir("asc");
-      data.sort((a, b) => (a[col] > b[col] ? 1 : a[col] < b[col] ? -1 : 0));
-    }
-    setResults(data);
-  };
-
   const filterTable = (query) => {
-    results.forEach((item, ind) =>
-      item[filterBy].includes(query)
-        ? (document.getElementById(ind).style.display = "table-row")
-        : (document.getElementById(ind).style.display = "none")
-    );
+    if (query === "") setResults(staticResults);
+    else {
+      let data;
+      if (filterBy === "age" || filterBy === "pclass" || filterBy === "fare")
+        data = staticResults.filter(
+          (item) => item[filterBy] === parseFloat(query)
+        );
+      else
+        data = staticResults.filter((item) =>
+          item[filterBy].toLowerCase().includes(query.toLowerCase())
+        );
+
+      setResults(data);
+    }
   };
 
   const searchFilter = (
     <InputGroup>
       <FormControl
         placeholder="Enter filter query"
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            filterTable(e.target.value);
-            console.log(e.target.value);
-          }
-        }}
+        type="search"
+        onChange={(e) => filterTable(e.target.value)}
+        // onKeyPress={(e) => {
+        //   if (e.key === "Enter") filterTable(e.target.value);
+        // }}
       />
-
       <DropdownButton
         as={InputGroup.Append}
         variant="outline-secondary"
@@ -109,6 +107,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("name");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Name";
           }}
         >
@@ -118,6 +117,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("age");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Age";
           }}
         >
@@ -127,6 +127,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("sex");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Sex";
           }}
         >
@@ -136,6 +137,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("fare");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Fare";
           }}
         >
@@ -145,6 +147,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("embarked");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Embarked";
           }}
         >
@@ -154,6 +157,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("pclass");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "PClass";
           }}
         >
@@ -163,6 +167,7 @@ const RecordsTable = () => {
           href="#"
           onClick={(e) => {
             setFilterBy("survived");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Survived";
           }}
         >
@@ -172,6 +177,7 @@ const RecordsTable = () => {
           href="#"
           onClick={() => {
             setFilterBy("fare category");
+            // filterTable("");
             document.getElementById("filter-dropdown").innerText =
               "Fare Category";
           }}
@@ -182,7 +188,7 @@ const RecordsTable = () => {
     </InputGroup>
   );
 
-  return results.length ? (
+  return staticResults.length ? (
     <Container>
       <h3 style={{ textAlign: "center" }} className="my-3">
         1912 Titanic Passenger Records
@@ -190,21 +196,33 @@ const RecordsTable = () => {
 
       {searchFilter}
 
-      <Table id="records-table" responsive striped>
-        <thead>
-          <tr>{setTableHeadings()}</tr>
-        </thead>
+      {results.length ? (
+        <Table id="records-table" responsive striped>
+          <thead>
+            <tr>{setTableHeadings()}</tr>
+          </thead>
 
-        <tbody>
-          {results.map((res, ind) => (
-            <tr id={ind} key={ind}>
-              {Object.values(res).map((d, i) => (
-                <td key={i}>{d}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+          <tbody>
+            {results.map((res, ind) => (
+              <tr id={ind} key={ind}>
+                {Object.values(res).map((d, i) => (
+                  <td key={i}>{d}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          Nothing found
+        </div>
+      )}
     </Container>
   ) : (
     <div
