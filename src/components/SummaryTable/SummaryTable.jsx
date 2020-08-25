@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import _, { filter } from "lodash";
 import {
   Table,
   Container,
@@ -8,17 +7,13 @@ import {
   FormControl,
   DropdownButton,
   Dropdown,
-  Row,
-  Button,
 } from "react-bootstrap";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { MdClear } from "react-icons/md";
 
 const RecordsTable = () => {
   const [staticResults, setStaticResults] = useState([]);
   const [results, setResults] = useState([]);
-  const [sortDir, setSortDir] = useState("asc");
   const [filterBy, setFilterBy] = useState("name");
 
   useEffect(() => {
