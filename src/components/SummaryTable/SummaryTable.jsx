@@ -185,10 +185,6 @@ const RecordsTable = () => {
 
   return staticResults.length ? (
     <Container>
-      <h3 style={{ textAlign: "center" }} className="my-3">
-        1912 Titanic Passenger Records
-      </h3>
-
       {searchFilter}
 
       {results.length ? (
