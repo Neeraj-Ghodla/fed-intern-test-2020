@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import {
   BarChart,
   XAxis,
@@ -12,22 +11,7 @@ import {
 
 import { Row, Col } from "react-bootstrap";
 
-export default function Chart() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchAPI = async () => {
-      const {
-        data: { records },
-      } = await axios.get(
-        "https://public.opendatasoft.com/api/records/1.0/search/?dataset=titanic-passengers&q=&rows=1000"
-      );
-      const results = records.map((record) => record.fields);
-      setData(results);
-      console.log(results);
-    };
-    fetchAPI();
-  }, []);
-
+export default function Chart({ data }) {
   const genderSurvivalChart = () => {
     let maleData = { survived: 0, died: 0 },
       femaleData = { survived: 0, died: 0 };
@@ -224,7 +208,7 @@ export default function Chart() {
 
   return (
     <>
-      {data ? (
+      {data.length ? (
         <Row
           className="mt-5"
           style={{ width: "100%", justifyContent: "center" }}
