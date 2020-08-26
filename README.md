@@ -9,6 +9,9 @@ npm install
 
 npm start
 ```
+
+The app is live at https://fed-intern-test.netlify.com
+
 ### Findings
 I found that the number of males that died were more than the number of females. This was probably because men were helping children and women to escape. From the graphs it can also be seen that more people died in in class 3 as compared to class 2 and class 1. This is because the people in class 1 and 2 were more rich/important persons and thus we allowed to escape the sinking the ship first.
 
