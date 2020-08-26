@@ -9,36 +9,8 @@ npm install
 
 npm start
 ```
-*Note: replace all the text below with your summary / findings when you have completed the task*
+### Findings
+I found that the number of males that died were more than the number of females. This was probably because men were helping children and women to escape. From the graphs it can also be seen that more number of people in class 3 as compared to class 2 and class 1. This is because the people in class 1 and 2 were more rich/important persons and thus we allowed to escape the sinking the ship first.
 
-The following task relates to passenger records from the Titanic sinking in 1912.
-Query the API link to get the data and **create a table that shows passenger records that meet the following criteria below.**
-**The table should be dynamic and can ideally be filtered by certain fields.**
-
-The table should:
-
-- only show passengers who paid for a fare
-- not show the number of siblings / spouses related to each passenger
-- show passengers based upon where they embarked
-- show passengers that did or did not survive
-- show passengers by gender and ticket class
--  classifies their ticket fare as either cheap (less than 20), regular (between 20-100), expensive (more than 100)
-- Extra / Optional: Draw a chart to represent the data. You can decide what you'd like to visualise!
-
-Replace the text in this README file and write a brief summary of your findings and how you approached the task. You are open to using any JavaScript packages and libraries. We recommend Recharts for charting.
-
-Array methods are preferred (such as `map`, `reduce` over for loops).
-
-You will be assessed on how well you structure and write your code, comments, and how you choose to display this information. Extra points for usability, creativity and design!
-
-To get started, read and add your work to the `Task.jsx` file.
-To get the data, it would be ideal to fetch it from the URL provided in the file.
-If you struggle with this, a subset of the data can be found in the `data` folder.
-
-Please upload your solution to a private github/bitbucket/etc repository (hide them from your competition!) and add backend@quantiful.co.nz as a collaborator. 
-
-Please submit your entry by **Friday 28th August 2020, 5pm.**
-
-Don't worry if you haven't completed it! You're more than welcome to make an incomplete submission - just let us know when you submit your entry.
-
-Good luck and happy coding! :D
+### Approach
+I first started with the table by using the Bootstrap table element. After that I implemented the filter feature, while I was working on the filter feature I also implemented the sorting feature for each column but later I removed it as it didn't add much to the application. Once the required task was completed I started working on the charts for which I used the Rechart library. I had to read Recharts decomentation as I have never used this library before. Once I was confident with the Recharts API, I implement the first chart (survival based on gender). Once I implemented the first chart, implementing others was pretty easy. After I got all the charts working I implemented the Tabs features which was pretty easy to implemented as I was already familar with Tabs API from React Bootstrap.
