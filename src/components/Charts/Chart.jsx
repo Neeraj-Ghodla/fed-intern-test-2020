@@ -7,11 +7,12 @@ import {
   Tooltip,
   Bar,
   Legend,
+  Label,
 } from "recharts";
 
 import { Row, Col } from "react-bootstrap";
 
-export default function Chart({ data }) {
+const Chart = ({ data }) => {
   const genderSurvivalChart = () => {
     let maleData = { survived: 0, died: 0 },
       femaleData = { survived: 0, died: 0 };
@@ -40,15 +41,17 @@ export default function Chart({ data }) {
       },
     ];
     return (
-      <BarChart width={500} height={300} data={survivalData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="survived" fill="green" />
-        <Bar dataKey="died" fill="red" />
-      </BarChart>
+      <>
+        <BarChart width={500} height={300} data={survivalData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="survived" fill="#42f560" />
+          <Bar dataKey="died" fill="#f54242" />
+        </BarChart>
+      </>
     );
   };
 
@@ -90,8 +93,8 @@ export default function Chart({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="survived" stackId="a" fill="green" />
-        <Bar dataKey="died" stackId="a" fill="red" />
+        <Bar dataKey="survived" stackId="a" fill="#42f560" />
+        <Bar dataKey="died" stackId="a" fill="#f54242" />
       </BarChart>
     );
   };
@@ -125,8 +128,8 @@ export default function Chart({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="survived" stackId="a" fill="green" />
-        <Bar dataKey="died" stackId="a" fill="red" />
+        <Bar dataKey="survived" stackId="a" fill="#42f560" />
+        <Bar dataKey="died" stackId="a" fill="#f54242" />
       </BarChart>
     );
   };
@@ -172,8 +175,8 @@ export default function Chart({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="survived" stackId="a" fill="green" />
-        <Bar dataKey="died" stackId="a" fill="red" />
+        <Bar dataKey="survived" stackId="a" fill="#42f560" />
+        <Bar dataKey="died" stackId="a" fill="#f54242" />
       </BarChart>
     );
   };
@@ -200,8 +203,8 @@ export default function Chart({ data }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="survived" stackId="a" fill="green" />
-        <Bar dataKey="died" stackId="a" fill="red" />
+        <Bar dataKey="survived" stackId="a" fill="#42f560" />
+        <Bar dataKey="died" stackId="a" fill="#f54242" />
       </BarChart>
     );
   };
@@ -215,41 +218,73 @@ export default function Chart({ data }) {
         >
           <Col
             className="mb-5"
-            style={{ justifyContent: "center", display: "flex" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
             xl={4}
           >
+            <h4 style={{ textAlign: "center" }}>Survival based on gender</h4>
             {genderSurvivalChart()}
           </Col>
           <Col
             className="mb-5"
-            style={{ justifyContent: "center", display: "flex" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
             xl={4}
           >
+            <h4 style={{ textAlign: "center" }}>Survival based on class</h4>
             {classSurvivalChart()}
           </Col>
           <Col
             className="mb-5"
-            style={{ justifyContent: "center", display: "flex" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
             xl={4}
           >
+            <h4 style={{ textAlign: "center" }}>Survival based on port</h4>
             {portSurvivalChart()}
           </Col>
           <Col
             className="mb-5"
-            style={{ justifyContent: "center", display: "flex" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
             xl={6}
           >
+            <h4 style={{ textAlign: "center" }}>Survival based on age</h4>
             {ageSurvivalChart()}
           </Col>
           <Col
             className="mb-5"
-            style={{ justifyContent: "center", display: "flex" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
             xl={6}
           >
+            <h4 style={{ textAlign: "center" }}>Survival based on onboard family members</h4>
             {familySurvivalChart()}
           </Col>
         </Row>
       ) : null}
     </>
   );
-}
+};
+
+export default Chart;

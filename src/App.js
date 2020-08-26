@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import RecordsTable from "./components/SummaryTable/SummaryTable";
-import Charts from "./components/Charts/Chart";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Tabs, Tab } from "react-bootstrap";
 import { CircularProgress } from "@material-ui/core";
+import axios from "axios";
+
+import RecordsTable from "./components/SummaryTable/SummaryTable";
+import Charts from "./components/Charts/Chart";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const [staticResults, setStaticResults] = useState([]);
