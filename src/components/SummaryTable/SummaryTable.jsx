@@ -36,6 +36,10 @@ const RecordsTable = ({
         data = staticResults.filter(
           (item) => item[filterBy] === parseFloat(query)
         );
+      else if (filterBy === "sex")
+        data = staticResults.filter((item) =>
+          item[filterBy].toLowerCase().startsWith(query.toLowerCase())
+        );
       else
         data = staticResults.filter((item) =>
           item[filterBy].toLowerCase().includes(query.toLowerCase())
@@ -51,9 +55,6 @@ const RecordsTable = ({
         placeholder="Enter filter query"
         type="search"
         onChange={(e) => filterTable(e.target.value)}
-        // onKeyPress={(e) => {
-        //   if (e.key === "Enter") filterTable(e.target.value);
-        // }}
       />
       <DropdownButton
         as={InputGroup.Append}
@@ -65,7 +66,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("name");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Name";
           }}
         >
@@ -75,7 +75,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("age");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Age";
           }}
         >
@@ -85,7 +84,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("sex");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Sex";
           }}
         >
@@ -95,7 +93,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("fare");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Fare";
           }}
         >
@@ -105,7 +102,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("embarked");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Embarked";
           }}
         >
@@ -115,7 +111,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("pclass");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "PClass";
           }}
         >
@@ -125,7 +120,6 @@ const RecordsTable = ({
           href="#"
           onClick={(e) => {
             setFilterBy("survived");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText = "Survived";
           }}
         >
@@ -135,7 +129,6 @@ const RecordsTable = ({
           href="#"
           onClick={() => {
             setFilterBy("fare category");
-            // filterTable("");
             document.getElementById("filter-dropdown").innerText =
               "Fare Category";
           }}

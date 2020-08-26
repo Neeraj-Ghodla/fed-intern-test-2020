@@ -7,7 +7,6 @@ import {
   Tooltip,
   Bar,
   Legend,
-  Label,
 } from "recharts";
 
 import { Row, Col } from "react-bootstrap";
@@ -252,7 +251,7 @@ const Chart = ({ data }) => {
             }}
             xl={4}
           >
-            <h4 style={{ textAlign: "center" }}>Survival based on port</h4>
+            <h4 style={{ textAlign: "center" }}>Survival based on boarding port</h4>
             {portSurvivalChart()}
           </Col>
           <Col
