@@ -45,7 +45,7 @@ const Chart = ({ data }) => {
     });
 
     return (
-      <BarChart width={500} height={300} data={survivalData}>
+      <BarChart width={500} height={300} data={genderSurvivalData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
