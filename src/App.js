@@ -9,20 +9,29 @@ import Charts from "./components/Charts/Chart";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
+  // both contain the same data initially for the Table element, but "staticResults"
+  // never change its state and is used to bring "results" to the default state.
   const [staticResults, setStaticResults] = useState([]);
   const [results, setResults] = useState([]);
+
+  // Field name based on which the filtering happens
   const [filterBy, setFilterBy] = useState("name");
+
+  // data used by the Charts element
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    // fetches the data from the API and populates all the state variables.
     const fetchAPI = async () => {
       const {
         data: { records },
       } = await axios.get(
         "https://public.opendatasoft.com/api/records/1.0/search/?dataset=titanic-passengers&q=&rows=1000"
       );
+
       const results = records.map((item) => item.fields);
 
+      // filter out all the unwanted fields from the results
       const filteredResults = results
         .filter((item) => item.fare > 0)
         .map(({ name, sex, fare, embarked, pclass, survived, age }) => ({
@@ -53,6 +62,8 @@ const App = () => {
     fetchAPI();
   }, []);
 
+  // Renders the app if the data is loaded from the API, otherwise renders a circular
+  // progress indicator.
   return (
     <>
       {staticResults.length ? (

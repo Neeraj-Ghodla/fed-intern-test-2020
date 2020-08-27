@@ -15,19 +15,21 @@ const RecordsTable = ({
   setResults,
   setFilterBy,
 }) => {
+  /**
+   * setTableHeadings is responsible for generating the heading for the table.
+   */
   const setTableHeadings = () => {
     const headings = Object.keys(results[0]);
     return headings.map((heading, index) => (
-      <th key={index}>
-        {heading.toUpperCase()}
-        {/* <FaSort
-          style={{ cursor: "pointer" }}
-          onClick={() => sortTable(heading)}
-        /> */}
-      </th>
+      <th key={index}>{heading.toUpperCase()}</th>
     ));
   };
 
+  /**
+   *
+   * @param {string} query The query by which the table needs to be filtered
+   * The filtering also depends on the filterBy variable.
+   */
   const filterTable = (query) => {
     if (query === "") setResults(staticResults);
     else {
@@ -49,6 +51,9 @@ const RecordsTable = ({
     }
   };
 
+  /**
+   * JSX element that generates the searchBar used to filter the table.
+   */
   const searchFilter = (
     <InputGroup>
       <FormControl

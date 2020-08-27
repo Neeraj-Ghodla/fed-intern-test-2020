@@ -12,49 +12,58 @@ import {
 import { Row, Col } from "react-bootstrap";
 
 const Chart = ({ data }) => {
+  /**
+   * This function is reponsible for generating the gender based survial chart.
+   *
+   * @returns JSX element
+   */
   const genderSurvivalChart = () => {
-    let maleData = { survived: 0, died: 0 },
-      femaleData = { survived: 0, died: 0 };
-
-    data.forEach((element) => {
-      if (element.sex === "male") {
-        if (element.survived === "No") maleData["died"]++;
-        else maleData["survived"]++;
-      }
-      if (element.sex === "female") {
-        if (element.survived === "No") femaleData["died"]++;
-        else femaleData["survived"]++;
-      }
-    });
-
-    const survivalData = [
+    // data for the BarChart
+    const genderSurvivalData = [
       {
         name: "Male",
-        survived: maleData["survived"],
-        died: maleData["died"],
+        survived: 0,
+        died: 0,
       },
       {
         name: "Female",
-        survived: femaleData["survived"],
-        died: femaleData["died"],
+        survived: 0,
+        died: 0,
       },
     ];
+
+    // populate the genderSurvivalData
+    data.forEach(({ sex, survived }) => {
+      if (sex === "male")
+        survived === "No"
+          ? genderSurvivalData[0]["died"]++
+          : genderSurvivalData[0]["survived"]++;
+      if (sex === "female")
+        survived === "No"
+          ? genderSurvivalData[1]["died"]++
+          : genderSurvivalData[1]["survived"]++;
+    });
+
     return (
-      <>
-        <BarChart width={500} height={300} data={survivalData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="survived" fill="#42f560" />
-          <Bar dataKey="died" fill="#f54242" />
-        </BarChart>
-      </>
+      <BarChart width={500} height={300} data={survivalData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="survived" fill="#42f560" />
+        <Bar dataKey="died" fill="#f54242" />
+      </BarChart>
     );
   };
 
+  /**
+   * This is funtion is responsible for generating the age based survial chart.
+   *
+   * @returns JSX element
+   */
   const ageSurvivalChart = () => {
+    // data for the BarChart
     const ageData = [
       { name: "< 11", survived: 0, died: 0 },
       { name: "11 to 20", survived: 0, died: 0 },
@@ -66,6 +75,7 @@ const Chart = ({ data }) => {
       { name: "71 to 80", survived: 0, died: 0 },
     ];
 
+    // populate the ageData
     data.forEach(({ age, survived }) => {
       if (age < 11)
         survived === "No" ? ageData[0]["died"]++ : ageData[0]["survived"]++;
@@ -98,13 +108,20 @@ const Chart = ({ data }) => {
     );
   };
 
+  /**
+   * This function is reponsible for generating the class based survival chart.
+   *
+   * @returns JSX element
+   */
   const classSurvivalChart = () => {
+    // data for the BarChart
     const classSurvivalData = [
       { class: "Class 1", survived: 0, died: 0 },
       { class: "Class 2", survived: 0, died: 0 },
       { class: "Class 3", survived: 0, died: 0 },
     ];
 
+    // populate the classSurvivalData
     data.forEach(({ pclass, survived }) => {
       if (pclass === 1)
         survived === "No"
@@ -133,7 +150,14 @@ const Chart = ({ data }) => {
     );
   };
 
+  /**
+   * This is function is responsible for generating the survial chart based on the
+   * boarding port.
+   *
+   * @returns JSX element
+   */
   const portSurvivalChart = () => {
+    // data for the BarChart
     const portSurvivalData = [
       {
         port: "Southampton",
@@ -152,6 +176,7 @@ const Chart = ({ data }) => {
       },
     ];
 
+    // populate the portSurvivalData
     data.forEach(({ embarked, survived }) => {
       if (embarked === "S")
         survived === "No"
@@ -180,9 +205,17 @@ const Chart = ({ data }) => {
     );
   };
 
+  /**
+   * This is funtion is reponsible for generating the survival chart based on the number
+   * of family members onboard.
+   *
+   * @returns JSX element
+   */
   const familySurvivalChart = () => {
+    // data for the BarChart
     const familySurvivalData = {};
 
+    // populate the familySurvivalData
     data.forEach(({ sibsp, survived }) => {
       if (!familySurvivalData.hasOwnProperty(sibsp))
         familySurvivalData[sibsp] = { sibsp, died: 0, survived: 0 };
@@ -251,7 +284,9 @@ const Chart = ({ data }) => {
             }}
             xl={4}
           >
-            <h4 style={{ textAlign: "center" }}>Survival based on boarding port</h4>
+            <h4 style={{ textAlign: "center" }}>
+              Survival based on boarding port
+            </h4>
             {portSurvivalChart()}
           </Col>
           <Col
@@ -277,7 +312,9 @@ const Chart = ({ data }) => {
             }}
             xl={6}
           >
-            <h4 style={{ textAlign: "center" }}>Survival based on onboard family members</h4>
+            <h4 style={{ textAlign: "center" }}>
+              Survival based on onboard family members
+            </h4>
             {familySurvivalChart()}
           </Col>
         </Row>
